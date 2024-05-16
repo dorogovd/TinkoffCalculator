@@ -10,8 +10,8 @@ import UIKit
 class ViewController: UIViewController {
     
     @IBAction func buttonPressed(_ sender: UIButton) {
-        let buttonText = sender.titleLabel?.text
-        print(buttonText ?? "fail")
+        guard let buttonText = sender.currentTitle else { return }
+        print(buttonText)
         
     }
     
