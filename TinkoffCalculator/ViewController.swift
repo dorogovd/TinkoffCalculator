@@ -50,8 +50,6 @@ class ViewController: UIViewController {
         
         if buttonText == "," && label.text == "0" || buttonText == "," && label.text == "Ошибка" {
             label.text = "0,"
-//        } else if buttonText == "+" || buttonText == "-" || buttonText == "x" || buttonText == "/" {
-//            label.text == label.text
         } else if label.text == "Ошибка" {
             label.text = buttonText
         } else if label.text == "0" {
