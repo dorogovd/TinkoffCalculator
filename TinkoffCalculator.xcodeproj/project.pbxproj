@@ -16,12 +16,7 @@
 		635B0D062BF0F0FB00BE9C6C /* TinkoffCalculatorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 635B0D052BF0F0FB00BE9C6C /* TinkoffCalculatorTests.swift */; };
 		635B0D102BF0F0FB00BE9C6C /* TinkoffCalculatorUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 635B0D0F2BF0F0FB00BE9C6C /* TinkoffCalculatorUITests.swift */; };
 		635B0D122BF0F0FB00BE9C6C /* TinkoffCalculatorUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 635B0D112BF0F0FB00BE9C6C /* TinkoffCalculatorUITestsLaunchTests.swift */; };
-		63FC5A622BFA639F00252624 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 635B0CF02BF0F0FA00BE9C6C /* SceneDelegate.swift */; };
-		63FC5A632BFA63A000252624 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 635B0CF02BF0F0FA00BE9C6C /* SceneDelegate.swift */; };
-		63FC5A642BFA63A400252624 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 635B0CEE2BF0F0FA00BE9C6C /* AppDelegate.swift */; };
-		63FC5A652BFA63A400252624 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 635B0CEE2BF0F0FA00BE9C6C /* AppDelegate.swift */; };
-		63FC5A662BFA63A900252624 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 635B0CF22BF0F0FA00BE9C6C /* ViewController.swift */; };
-		63FC5A672BFA63AA00252624 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 635B0CF22BF0F0FA00BE9C6C /* ViewController.swift */; };
+		63FC5A6A2BFA66A000252624 /* CalculationsListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63FC5A692BFA66A000252624 /* CalculationsListViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -55,6 +50,7 @@
 		635B0D0B2BF0F0FB00BE9C6C /* TinkoffCalculatorUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TinkoffCalculatorUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		635B0D0F2BF0F0FB00BE9C6C /* TinkoffCalculatorUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TinkoffCalculatorUITests.swift; sourceTree = "<group>"; };
 		635B0D112BF0F0FB00BE9C6C /* TinkoffCalculatorUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TinkoffCalculatorUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		63FC5A692BFA66A000252624 /* CalculationsListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalculationsListViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -108,6 +104,7 @@
 				635B0CEE2BF0F0FA00BE9C6C /* AppDelegate.swift */,
 				635B0CF02BF0F0FA00BE9C6C /* SceneDelegate.swift */,
 				635B0CF22BF0F0FA00BE9C6C /* ViewController.swift */,
+				63FC5A692BFA66A000252624 /* CalculationsListViewController.swift */,
 				635B0CF42BF0F0FA00BE9C6C /* Main.storyboard */,
 				635B0CF72BF0F0FB00BE9C6C /* Assets.xcassets */,
 				635B0CF92BF0F0FB00BE9C6C /* LaunchScreen.storyboard */,
@@ -264,6 +261,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				63FC5A6A2BFA66A000252624 /* CalculationsListViewController.swift in Sources */,
 				635B0CF32BF0F0FA00BE9C6C /* ViewController.swift in Sources */,
 				635B0CEF2BF0F0FA00BE9C6C /* AppDelegate.swift in Sources */,
 				635B0CF12BF0F0FA00BE9C6C /* SceneDelegate.swift in Sources */,
@@ -274,10 +272,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				63FC5A642BFA63A400252624 /* AppDelegate.swift in Sources */,
 				635B0D062BF0F0FB00BE9C6C /* TinkoffCalculatorTests.swift in Sources */,
-				63FC5A662BFA63A900252624 /* ViewController.swift in Sources */,
-				63FC5A622BFA639F00252624 /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -285,11 +280,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				63FC5A672BFA63AA00252624 /* ViewController.swift in Sources */,
-				63FC5A652BFA63A400252624 /* AppDelegate.swift in Sources */,
 				635B0D122BF0F0FB00BE9C6C /* TinkoffCalculatorUITestsLaunchTests.swift in Sources */,
 				635B0D102BF0F0FB00BE9C6C /* TinkoffCalculatorUITests.swift in Sources */,
-				63FC5A632BFA63A000252624 /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
