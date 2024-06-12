@@ -312,7 +312,7 @@
             </objects>
             <point key="canvasLocation" x="1010.144927536232" y="3.3482142857142856"/>
         </scene>
-        <!--История-->
+        <!--Прошлые вычисления-->
         <scene sceneID="KXi-PW-w9g">
             <objects>
                 <viewController storyboardIdentifier="CalculationsListViewController" id="O0Z-lC-X8x" customClass="CalculationsListViewController" customModule="TinkoffCalculator" customModuleProvider="target" sceneMemberID="viewController">
@@ -352,7 +352,7 @@
                             <constraint firstItem="Ef1-E6-qwo" firstAttribute="centerY" secondItem="HEO-eT-esr" secondAttribute="centerY" id="zKQ-PP-0PJ"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" title="История" id="eV9-Ja-vPz"/>
+                    <navigationItem key="navigationItem" title="Прошлые вычисления" id="eV9-Ja-vPz"/>
                     <connections>
                         <outlet property="calculationLabel" destination="Ef1-E6-qwo" id="LNe-OH-nOy"/>
                     </connections>

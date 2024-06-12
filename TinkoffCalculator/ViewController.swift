@@ -41,7 +41,17 @@ enum CalculationHistoryItem {
 
 class ViewController: UIViewController {
     
+    var isCalculateButtonPressed = false
+    var isCalculateFuncCalled = false
+    var resultForHistory: String = ""
+    
     @IBAction func buttonPressed(_ sender: UIButton) {
+        
+        if isCalculateButtonPressed == true {
+            label.text = "0"
+            isCalculateButtonPressed = false
+        }
+        
         guard let buttonText = sender.currentTitle else { return }
         
         if buttonText == "," && label.text?.contains(",") == true {
@@ -60,7 +70,8 @@ class ViewController: UIViewController {
     }
     
     @IBAction func operationButtonPressed(_ sender: UIButton) {
-        guard 
+        
+        guard
             let buttonText = sender.currentTitle,
             let buttonOperation = Operation(rawValue: buttonText)
             else { return }
@@ -81,6 +92,10 @@ class ViewController: UIViewController {
     }
     
     @IBAction func calculateButtonPressed() {
+        
+        isCalculateButtonPressed = true
+        isCalculateFuncCalled = true
+    
         guard
             let labelText = label.text, // конвертируем текстлэйбл в число
             let labelNumber = numberFormatter.number(from: labelText)?.doubleValue
@@ -92,6 +107,10 @@ class ViewController: UIViewController {
             let result = try calculate()
             
             label.text = numberFormatter.string(from: NSNumber(value: result))
+            
+            resultForHistory = String(result)
+            resultForHistory = resultForHistory.components(separatedBy: ".")[0]
+            
         } catch {
             label.text = "Ошибка"
         }
@@ -104,7 +123,14 @@ class ViewController: UIViewController {
         let sb = UIStoryboard(name: "Main", bundle: nil)
         let calculationsListVC = sb.instantiateViewController(identifier: "CalculationsListViewController")
         if let vc = calculationsListVC as? CalculationsListViewController {
-            vc.result = label.text
+    
+            if isCalculateFuncCalled && resultForHistory != "" {
+                vc.result = resultForHistory
+            } else if isCalculateFuncCalled {
+                vc.result = label.text
+            } else {
+                vc.result = "NoData"
+            }
         }
         
         navigationController?.pushViewController(calculationsListVC, animated: true)
@@ -148,7 +174,9 @@ class ViewController: UIViewController {
             
             currentResult = try operation.calculate(currentResult, number)
         }
+      //  resultForHistory = String(currentResult)
         return currentResult
+      //  resultForHistory = String(currentResult)
     }
 
     func resetTextLabel() {
