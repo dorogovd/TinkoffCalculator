@@ -98,15 +98,19 @@ class ViewController: UIViewController {
         calculationHistory.removeAll()
     }
     
-    @IBAction func unwindAction(unwindSegue: UIStoryboardSegue) {
+
+    
+    @IBAction func showCalculationsList(_ sender: Any) {
+        let sb = UIStoryboard(name: "Main", bundle: nil)
+        let calculationsListVC = sb.instantiateViewController(identifier: "CalculationsListViewController")
+        if let vc = calculationsListVC as? CalculationsListViewController {
+            vc.result = label.text
+        }
         
+        navigationController?.pushViewController(calculationsListVC, animated: true)
     }
     
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        guard segue.identifier == "CALCULATIONS_LIST",
-              let calculationsListVC = segue.destination as? CalculationsListViewController else { return }
-        calculationsListVC.result = label.text
-    }
+    
     
     @IBOutlet weak var label: UILabel!
     
@@ -126,6 +130,11 @@ class ViewController: UIViewController {
         // Do any additional setup after loading the view.
         
         resetTextLabel()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        navigationController?.setNavigationBarHidden(true, animated: false)
     }
     
     func calculate() throws -> Double {
