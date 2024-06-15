@@ -53,6 +53,7 @@ class ViewController: UIViewController {
         // Do any additional setup after loading the view.
         
         resetTextLabel()
+        historyButton.accessibilityIdentifier = "historyButton"
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -160,6 +161,7 @@ class ViewController: UIViewController {
     }
     
     @IBOutlet var label: UILabel!
+    @IBOutlet var historyButton: UIButton!
     
     func calculate() throws -> Double {
         guard case .number(let firstNumber) = calculationHistory[0] else { return 0 }

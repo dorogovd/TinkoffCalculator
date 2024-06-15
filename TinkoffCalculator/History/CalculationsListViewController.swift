@@ -69,9 +69,19 @@ extension CalculationsListViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 90.0
     }
+
+    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "dd.MM.yyyy"
+        return dateFormatter.string(from: Date())
+    }
+    
 }
 
 extension CalculationsListViewController: UITableViewDataSource {
+//    func numberOfSections(in tableView: UITableView) -> Int {
+//        return 2
+//    }
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return calculations.count
     }

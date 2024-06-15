@@ -17,5 +17,4 @@ class HistoryTableViewCell: UITableViewCell {
         expressionLabel.text = expression
         resultLabel.text = result
     }
-    
 }
