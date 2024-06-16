@@ -41,9 +41,38 @@ enum CalculationHistoryItem {
 
 class ViewController: UIViewController {
     
+    var calculationHistory: [CalculationHistoryItem] = []
+    var calculations: [Calculation] = []
+    
+    let calculationHistoryStorage = CalculationHistoryStorage()
+    
+    
     var isCalculateButtonPressed = false
     var isCalculateFuncCalled = false
     var resultForHistory: String = ""
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        // Do any additional setup after loading the view.
+        
+        resetTextLabel()
+        historyButton.accessibilityIdentifier = "historyButton"
+        calculations = calculationHistoryStorage.loadHistory()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        navigationController?.setNavigationBarHidden(true, animated: false)
+    }
+    
+    // ленивое свойство (в отличии от обычного) устанавливает своё значение только после обращения к нему и в дальнейшем это значение не изменяется
+    lazy var numberFormatter: NumberFormatter = {
+        let numberFormatter = NumberFormatter()
+        numberFormatter.usesGroupingSeparator = false
+        numberFormatter.locale = Locale(identifier: "ru_RU")
+        numberFormatter.numberStyle = .decimal
+        return numberFormatter
+    }()
     
     @IBAction func buttonPressed(_ sender: UIButton) {
         
@@ -70,7 +99,6 @@ class ViewController: UIViewController {
     }
     
     @IBAction func operationButtonPressed(_ sender: UIButton) {
-        
         guard
             let buttonText = sender.currentTitle,
             let buttonOperation = Operation(rawValue: buttonText)
@@ -105,11 +133,15 @@ class ViewController: UIViewController {
         
         do {
             let result = try calculate()
+           
             
             label.text = numberFormatter.string(from: NSNumber(value: result))
+            let newCalculation = Calculation(expression: calculationHistory, result: result, date: Date.now)
+            calculations.append(newCalculation)
+            calculationHistoryStorage.setHistory(calculation: calculations)
             
-            resultForHistory = String(result)
-            resultForHistory = resultForHistory.components(separatedBy: ".")[0]
+      //      resultForHistory = String(result)
+       //     resultForHistory = resultForHistory.components(separatedBy: ".")[0]
             
         } catch {
             label.text = "Ошибка"
@@ -117,51 +149,26 @@ class ViewController: UIViewController {
         calculationHistory.removeAll()
     }
     
-
-    
     @IBAction func showCalculationsList(_ sender: Any) {
         let sb = UIStoryboard(name: "Main", bundle: nil)
         let calculationsListVC = sb.instantiateViewController(identifier: "CalculationsListViewController")
         if let vc = calculationsListVC as? CalculationsListViewController {
-    
-            if isCalculateFuncCalled && resultForHistory != "" {
-                vc.result = resultForHistory
-            } else if isCalculateFuncCalled {
-                vc.result = label.text
-            } else {
-                vc.result = "NoData"
-            }
+            vc.calculations = calculations
+            
+//            if isCalculateFuncCalled && resultForHistory != "" {
+//                vc.result = resultForHistory
+//            } else if isCalculateFuncCalled {
+//                vc.calculations = calculations
+//            } else {
+//                vc.result = "NoData"
+//            }
         }
         
         navigationController?.pushViewController(calculationsListVC, animated: true)
     }
     
-    
-    
-    @IBOutlet weak var label: UILabel!
-    
-    var calculationHistory: [CalculationHistoryItem] = []
-    
-    // ленивое свойство (в отличии от обычного) устанавливает своё значение только после обращения к нему и в дальнейшем это значение не изменяется
-    lazy var numberFormatter: NumberFormatter = {
-        let numberFormatter = NumberFormatter()
-        numberFormatter.usesGroupingSeparator = false
-        numberFormatter.locale = Locale(identifier: "ru_RU")
-        numberFormatter.numberStyle = .decimal
-        return numberFormatter
-    }()
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        // Do any additional setup after loading the view.
-        
-        resetTextLabel()
-    }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        navigationController?.setNavigationBarHidden(true, animated: false)
-    }
+    @IBOutlet var label: UILabel!
+    @IBOutlet var historyButton: UIButton!
     
     func calculate() throws -> Double {
         guard case .number(let firstNumber) = calculationHistory[0] else { return 0 }
@@ -174,14 +181,11 @@ class ViewController: UIViewController {
             
             currentResult = try operation.calculate(currentResult, number)
         }
-      //  resultForHistory = String(currentResult)
         return currentResult
-      //  resultForHistory = String(currentResult)
     }
 
     func resetTextLabel() {
         label.text = "0"
     }
-
 }
 

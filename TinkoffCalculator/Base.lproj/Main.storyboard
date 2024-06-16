@@ -219,7 +219,7 @@
                                     <imageReference key="image" image="clock" catalog="system" symbolScale="large"/>
                                 </state>
                                 <connections>
-                                    <action selector="showCalculationsList:" destination="BYZ-38-t0r" eventType="touchUpInside" id="SNI-wB-dBp"/>
+                                    <action selector="showCalculationsList:" destination="BYZ-38-t0r" eventType="touchUpInside" id="X5q-Sr-90o"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -305,6 +305,7 @@
                     </view>
                     <navigationItem key="navigationItem" title="Калькулятор" id="fJg-66-WZ8"/>
                     <connections>
+                        <outlet property="historyButton" destination="ra1-WR-7Sn" id="yNs-Zz-LeX"/>
                         <outlet property="label" destination="dSq-xj-3TT" id="U2u-vZ-EGq"/>
                     </connections>
                 </viewController>
@@ -320,41 +321,23 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ef1-E6-qwo">
-                                <rect key="frame" x="207" y="448" width="0.0" height="0.0"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ELS-lW-m6h">
-                                <rect key="frame" x="162" y="565.5" width="90.5" height="35"/>
-                                <state key="normal" title="Button"/>
-                                <buttonConfiguration key="configuration" style="plain" title="Закрыть"/>
-                                <connections>
-                                    <action selector="dismissVC:" destination="O0Z-lC-X8x" eventType="touchUpInside" id="yA4-3Q-0Jm"/>
-                                </connections>
-                            </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Результат" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="r3q-c8-2h7">
-                                <rect key="frame" x="167.5" y="324.5" width="79" height="21"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="S0G-rz-PSp">
+                                <rect key="frame" x="0.0" y="48" width="414" height="814"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                            </tableView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="7yM-0I-Z03"/>
                         <color key="backgroundColor" systemColor="systemGray2Color"/>
                         <constraints>
-                            <constraint firstItem="r3q-c8-2h7" firstAttribute="centerX" secondItem="HEO-eT-esr" secondAttribute="centerX" id="DTe-Ma-00Z"/>
-                            <constraint firstItem="ELS-lW-m6h" firstAttribute="centerX" secondItem="HEO-eT-esr" secondAttribute="centerX" id="WrK-tB-Nl0"/>
-                            <constraint firstItem="ELS-lW-m6h" firstAttribute="top" secondItem="Ef1-E6-qwo" secondAttribute="bottom" constant="117.5" id="YRX-TR-TZj"/>
-                            <constraint firstItem="Ef1-E6-qwo" firstAttribute="centerX" secondItem="HEO-eT-esr" secondAttribute="centerX" id="jLf-b9-6W5"/>
-                            <constraint firstItem="Ef1-E6-qwo" firstAttribute="top" secondItem="r3q-c8-2h7" secondAttribute="bottom" constant="102.5" id="vsp-ka-yqZ"/>
-                            <constraint firstItem="Ef1-E6-qwo" firstAttribute="centerY" secondItem="HEO-eT-esr" secondAttribute="centerY" id="zKQ-PP-0PJ"/>
+                            <constraint firstItem="S0G-rz-PSp" firstAttribute="leading" secondItem="7yM-0I-Z03" secondAttribute="leading" id="C9n-Ax-ia1"/>
+                            <constraint firstItem="S0G-rz-PSp" firstAttribute="trailing" secondItem="7yM-0I-Z03" secondAttribute="trailing" id="LXe-ia-bLT"/>
+                            <constraint firstItem="S0G-rz-PSp" firstAttribute="top" secondItem="7yM-0I-Z03" secondAttribute="top" id="Xz1-Jc-Eni"/>
+                            <constraint firstItem="S0G-rz-PSp" firstAttribute="bottom" secondItem="7yM-0I-Z03" secondAttribute="bottom" id="c9Z-kP-yqr"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Прошлые вычисления" id="eV9-Ja-vPz"/>
                     <connections>
-                        <outlet property="calculationLabel" destination="Ef1-E6-qwo" id="LNe-OH-nOy"/>
+                        <outlet property="tableView" destination="S0G-rz-PSp" id="vn5-ah-NEW"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Evd-iB-krF" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
