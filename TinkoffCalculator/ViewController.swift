@@ -133,9 +133,10 @@ class ViewController: UIViewController {
         
         do {
             let result = try calculate()
+           
             
             label.text = numberFormatter.string(from: NSNumber(value: result))
-            let newCalculation = Calculation(expression: calculationHistory, result: result)
+            let newCalculation = Calculation(expression: calculationHistory, result: result, date: Date.now)
             calculations.append(newCalculation)
             calculationHistoryStorage.setHistory(calculation: calculations)
             
