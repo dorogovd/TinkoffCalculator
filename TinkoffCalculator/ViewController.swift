@@ -41,6 +41,9 @@ enum CalculationHistoryItem {
 
 class ViewController: UIViewController {
     
+    
+    
+    
     var isCalculateButtonPressed = false
     var isCalculateFuncCalled = false
     var resultForHistory: String = ""
@@ -133,7 +136,14 @@ class ViewController: UIViewController {
             }
         }
         
-        navigationController?.pushViewController(calculationsListVC, animated: true)
+    
+        calculationsListVC.title = "Прошлые вычисления"
+        navigationController?.show(calculationsListVC, sender: self)
+            //.present(calculationsListVC, animated: true, completion: nil)
+            //.show(calculationsListVC, sender: self)
+            //.setViewControllers([calculationsListVC], animated: true)
+            //.popToViewController(calculationsListVC, animated: true)
+            //.pushViewController(calculationsListVC, animated: true)
     }
     
     

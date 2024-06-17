@@ -331,7 +331,7 @@
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="plain" title="Закрыть"/>
                                 <connections>
-                                    <action selector="dismissVC:" destination="O0Z-lC-X8x" eventType="touchUpInside" id="yA4-3Q-0Jm"/>
+                                    <action selector="dismissVC:" destination="O0Z-lC-X8x" eventType="touchUpInside" id="Mgl-1M-7DG"/>
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Результат" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="r3q-c8-2h7">
