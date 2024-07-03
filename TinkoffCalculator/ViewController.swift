@@ -122,6 +122,8 @@ class ViewController: UIViewController {
         if label.text == "3,141592" {
             animateAlert()
         }
+        
+        sender.animateTap()
     }
     
     @IBAction func operationButtonPressed(_ sender: UIButton) {
@@ -142,7 +144,7 @@ class ViewController: UIViewController {
     
     @IBAction func clearButtonPressed() {
         calculationHistory.removeAll()
-        resetTextLabel()
+        resetTextLabel() // расхождение в нейминге с проектом
     }
     
     @IBAction func calculateButtonPressed() {
@@ -171,6 +173,7 @@ class ViewController: UIViewController {
             
         } catch {
             label.text = "Ошибка"
+            label.shake()
         }
         calculationHistory.removeAll()
         animateBackground()
@@ -260,3 +263,35 @@ class ViewController: UIViewController {
     }
 }
 
+extension UILabel {
+    
+    func shake() {
+        let animation = CABasicAnimation(keyPath: "position")
+        animation.duration = 0.05
+        animation.repeatCount = 5
+        animation.autoreverses = true
+        animation.fromValue = NSValue(cgPoint: CGPoint(x: center.x - 5, y: center.y))
+        animation.toValue = NSValue(cgPoint: CGPoint(x: center.x + 5, y: center.y))
+        
+        layer.add(animation, forKey: "position")
+    }
+}
+
+extension UIButton {
+    
+    func animateTap() {
+        let scaleAnimation = CAKeyframeAnimation(keyPath: "transform.scale")
+        scaleAnimation.values = [1, 0.9, 1]
+        scaleAnimation.keyTimes = [0, 0.2, 1]
+        
+        let opacityAnimation = CAKeyframeAnimation(keyPath: "opacity")
+        opacityAnimation.values = [0.4, 0.8, 1]
+        opacityAnimation.keyTimes = [0, 0.2, 1]
+        
+        let animationGroup = CAAnimationGroup()
+        animationGroup.duration = 1.5
+        animationGroup.animations = [scaleAnimation, opacityAnimation]
+        
+        layer.add(animationGroup, forKey: "groupAnimation")
+    }
+}
