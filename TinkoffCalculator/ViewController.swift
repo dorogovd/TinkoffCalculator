@@ -74,6 +74,12 @@ class ViewController: UIViewController {
         view.addSubview(alertView)
         alertView.alpha = 0
         alertView.alertText = "Вы нашли пасхалку!"
+        
+        view.subviews.forEach {
+            if type(of: $0) == UIButton.self { // проверяем является ли вью кнопкой
+                $0.layer.cornerRadius = 45
+            }
+        }
     }
     
     override func viewWillAppear(_ animated: Bool) {
