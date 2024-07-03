@@ -173,6 +173,7 @@ class ViewController: UIViewController {
             label.text = "Ошибка"
         }
         calculationHistory.removeAll()
+        animateBackground()
     }
     
     @IBAction func showCalculationsList(_ sender: Any) {
@@ -246,6 +247,16 @@ class ViewController: UIViewController {
 //            newCenter.y -= self.alertView.bounds.height
 //            self.alertView.center = newCenter
         }
+    }
+    
+    func animateBackground() {
+        let animation = CABasicAnimation(keyPath: "backgroundColor")
+        animation.duration = 1
+        animation.fromValue = UIColor.white.cgColor
+        animation.toValue = UIColor.blue.cgColor
+        
+        view.layer.add(animation, forKey: "backgroundColor")
+        view.layer.backgroundColor = UIColor.blue.cgColor
     }
 }
 
