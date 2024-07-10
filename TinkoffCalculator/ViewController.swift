@@ -7,6 +7,13 @@
 
 import UIKit
 
+protocol LongPressViewProtocol {
+    var shared: UIView { get }
+    
+    func startAnimation()
+    func stopAnimation()
+}
+
 enum CalculationError: Error {
     case dividedByZero
 }

@@ -63,6 +63,13 @@ private func expressionToString(_ expression: [CalculationHistoryItem]) -> Strin
         }
     return result
     }
+    
+    private func getCurrentDate(_ date: Date) -> String {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "dd.MM.yyyy"
+        
+        return dateFormatter.string(from: date)
+    }
 }
 
 extension CalculationsListViewController: UITableViewDelegate {
@@ -71,9 +78,7 @@ extension CalculationsListViewController: UITableViewDelegate {
     }
 
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "dd.MM.yyyy"
-        return dateFormatter.string(from: Date())
+        return getCurrentDate(calculations[section].date)
     }
     
 }
@@ -89,7 +94,7 @@ extension CalculationsListViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "HistoryTableViewCell", for: indexPath) as! HistoryTableViewCell
-        let historyItem = calculations[indexPath.row]
+        let historyItem = calculations[indexPath.section]
         cell.configure(with: expressionToString(historyItem.expression), result: String(historyItem.result))
         return cell
     }
