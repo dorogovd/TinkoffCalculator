@@ -48,6 +48,23 @@ enum CalculationHistoryItem {
 
 class ViewController: UIViewController {
     
+    let visualEffectView: UIVisualEffectView = {
+        let blurEffect = UIBlurEffect(style: .dark)
+        let view = UIVisualEffectView(effect: blurEffect)
+        view.translatesAutoresizingMaskIntoConstraints = false
+        return view
+    }()
+
+    func setupVisualEffectView() {
+            view.addSubview(visualEffectView)
+            visualEffectView.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
+            visualEffectView.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
+            visualEffectView.topAnchor.constraint(equalTo: view.topAnchor).isActive = true
+            visualEffectView.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
+            visualEffectView.alpha = 0
+    
+        }
+    
     var calculationHistory: [CalculationHistoryItem] = []
     var calculations: [Calculation] = []
     
@@ -77,7 +94,7 @@ class ViewController: UIViewController {
         historyButton.accessibilityIdentifier = "historyButton"
         calculations = calculationHistoryStorage.loadHistory()
         
-        resetTextLabel()
+    //    resetTextLabel()
         view.addSubview(alertView)
         alertView.alpha = 0
         alertView.alertText = "Вы нашли пасхалку!"
@@ -87,7 +104,20 @@ class ViewController: UIViewController {
                 $0.layer.cornerRadius = 45
             }
         }
+        
+        let longPress = UILongPressGestureRecognizer(target: self, action: #selector (actionLongPress))
+        longPress.minimumPressDuration = 0.5
+        view.addGestureRecognizer(longPress)
     }
+    
+    @objc func actionLongPress(Recognizer:  UILongPressGestureRecognizer) {
+    if Recognizer.state == .began {
+        startAnimation()
+    }
+    else if Recognizer.state == .ended {
+        stopAnimation()
+    }
+}
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -175,9 +205,6 @@ class ViewController: UIViewController {
             calculations.append(newCalculation)
             calculationHistoryStorage.setHistory(calculation: calculations)
             
-      //      resultForHistory = String(result)
-       //     resultForHistory = resultForHistory.components(separatedBy: ".")[0]
-            
         } catch {
             label.text = "Ошибка"
             label.shake()
@@ -191,14 +218,6 @@ class ViewController: UIViewController {
         let calculationsListVC = sb.instantiateViewController(identifier: "CalculationsListViewController")
         if let vc = calculationsListVC as? CalculationsListViewController {
             vc.calculations = calculations
-            
-//            if isCalculateFuncCalled && resultForHistory != "" {
-//                vc.result = resultForHistory
-//            } else if isCalculateFuncCalled {
-//                vc.calculations = calculations
-//            } else {
-//                vc.result = "NoData"
-//            }
         }
         
         navigationController?.pushViewController(calculationsListVC, animated: true)
@@ -239,6 +258,7 @@ class ViewController: UIViewController {
             UIView.addKeyframe(withRelativeStartTime: 0.5, relativeDuration: 0.5) {
                 var newCenter = self.label.center
                 newCenter.y -= self.alertView.bounds.height
+              //  newCenter.x = self.label.bounds.width // ??? не понятно как настроить
                 self.alertView.center = newCenter
             }
         
@@ -266,7 +286,7 @@ class ViewController: UIViewController {
         animation.toValue = UIColor.blue.cgColor
         
         view.layer.add(animation, forKey: "backgroundColor")
-        view.layer.backgroundColor = UIColor.blue.cgColor
+     //   view.layer.backgroundColor = UIColor.blue.cgColor
     }
 }
 
@@ -300,5 +320,27 @@ extension UIButton {
         animationGroup.animations = [scaleAnimation, opacityAnimation]
         
         layer.add(animationGroup, forKey: "groupAnimation")
+    }
+}
+
+extension ViewController: LongPressViewProtocol {
+    var shared: UIView {
+        let shared = visualEffectView
+        return shared
+}
+ 
+    func startAnimation() {
+        print("Start Animation")
+       
+        setupVisualEffectView()
+        UIView.animate(withDuration: 2){
+        self.shared.alpha = 1
+            
+        }
+    }
+    
+    func stopAnimation() {
+        print("Stop animation")
+       shared.removeFromSuperview()
     }
 }
